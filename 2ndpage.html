@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Attendance Tracker</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <py-config>
+        packages = ["matplotlib"]
+    </py-config>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root{
+            --card: rgba(192, 202, 218, 0.85);
+            --muted: #518ba8;
+            --soft-border: rgba(88,64,45,0.14);
+            --accent-600: #0c426f;
+        }
+
+        body{
+            font-family: Arial;
+            background: url('3.png') no-repeat center center fixed;
+            background-size: cover;
+            padding-top: 70px;
+            background-color: #dfe3ec;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:15px;
+            font-size:22px;
+        }
+        .container-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 70px);
+            
+        }
+
+        .box {
+            border-radius:16px;
+            padding:30px;
+            background: var(--card);
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-box {
+            width: 400px;
+        }
+
+        .graph-box {
+            width: 750px;
+            height: 550px;
+            text-align: center;
+        }
+
+        #graphHolder {
+            width: 100%;
+            height: 350px;
+        }
+
+        input, select {
+            margin-bottom: 10px;
+        }
+
+    
+        @media (max-width: 768px) {
+            .container-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+           .navbar{
+            background: var(--card);
+            background-color: #718bcc;
+            box-shadow:0 10px 30px rgba(59, 79, 167, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #153b77 !important;
+        }
+        .btn{background:var(--accent-600);color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:700;transition:all .2s;display:inline-block}
+            .btn:hover{background:#b16d5c;color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(173,128,48,0.15)}
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">OBMC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Classmates List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="2ndpage.html">Attendance Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="3rdpage.html">10 Grade Highlights</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container-flex">
+
+    <div class="box form-box">
+        <h1>Attendance</h1>
+
+        <select id="day" class="form-select">
+            <option value="select days">Select day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+        </select>
+
+        <input type="number" id="absences" class="form-control" placeholder="Absences">
+
+        <input type="button" py-click="sample_numpy" style="width:100%;margin-top:8px;" value="Submit" class="btn btn-primary w-100">
+    </div>
+
+
+    <div class="box graph-box">
+        <h1>Graph</h1>
+        <div id="graphHolder"></div>
+    </div>
+
+</div>
+
+<script type="py" src="2ndpage.py"></script>
+
+</body>
+</html>

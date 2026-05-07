@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My Classmates</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .class{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100vh;
+            box-sizing:border-box;
+        }
+        h1, h5{
+            text-align:center;
+            margin-top:20px;
+            color:var(--accent-600);
+            font-size:28px;
+            font-weight:700;
+            color: #153b77;
+        }
+        :root{
+            --bg: rgba(255,240,230,0.8);              
+            --card: rgba(192, 202, 218, 0.85);
+            --accent: #b22222;         
+            --accent-600: #800000;     
+            --muted: #4a1a1a;
+            --soft-border: rgba(88,64,45,0.14);
+            --shadow: 0 18px 40px rgba(30,35,40,0.09);
+            --success: #2f8f5a;
+            --input-bg: #fffaf6;
+        }
+         html,body{height:100%;margin:0}
+          body{font-family:Inter,system-ui,Arial;background:url('3.png') no-repeat center center fixed;background-size:cover;line-height:1.5;background-color: #dfe3ec;}
+          .btn{background:var(--accent-600);color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:700;transition:all .2s;display:inline-block}
+            .btn:hover{background:#8f6a1f;color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(173,128,48,0.15)}
+          
+         body {
+            padding-top: 70px; 
+        }
+        .container-center {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100vh;
+            padding:0 20px;
+            box-sizing:border-box;
+        }
+        .box {
+            align-self:center;
+            border-radius:16px;
+            padding:36px 40px;
+            background: var(--card);
+            box-shadow:0 20px 50px rgba(30,35,40,0.08), 0 0 0 1px var(--soft-border);
+            max-width:420px;
+            width:100%;
+            text-align:center;
+        }
+        #classmatefav{
+            white-space:pre-wrap;
+            margin-top:8px;
+            color:var(--muted);
+            text-align:center;
+        }
+        #classmatefav .list-wrap{
+            background:var(--card);
+            padding:6px;
+            border-radius:8px;
+            border:1px solid rgba(172,136,80,0.06);
+            display:inline-block;
+            max-width:360px;
+            width:auto;
+        }
+        #classmatefav .classmate-item{
+            padding:4px 6px;
+            border-radius:4px;
+            margin-bottom:4px;
+            background:transparent;
+            color:var(--muted);
+            text-align:center;
+            font-size:14px;
+            line-height:1.4;
+        }
+        input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 12px 0;
+    border: 1.5px solid var(--soft-border);
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    background-color: #fafafa;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+        .container-flex {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(180px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            padding-top: 20px;
+            justify-items: center;
+        }
+        .highlight-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 220px;
+            transition: transform 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #153b77;
+        }
+        .card-image {
+            width: 200px;
+            height: 240px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid var(--soft-border);
+        }
+        .card-event {
+            font-size: 14px;
+            color: #153b77;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        @media (max-width: 1400px) {
+            .container-flex {
+                grid-template-columns: repeat(4, minmax(180px, 1fr));
+            }
+        }
+        @media (max-width: 1100px) {
+            .container-flex {
+                grid-template-columns: repeat(3, minmax(180px, 1fr));
+            }
+        }
+        @media (max-width: 800px) {
+            .container-flex {
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+            }
+        }
+        @media (max-width: 540px) {
+            .container-flex {
+                grid-template-columns: 1fr;
+            }
+            .card-image {
+                width: 100%;
+                height: auto;
+            }
+        }
+           .navbar{
+            background: var(--card);
+            background-color: #718bcc;
+            box-shadow:0 10px 30px rgba(59, 79, 167, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #153b77 !important;
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">OBMC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Classmates List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="2ndpage.html">Attendance Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="3rdpage.html">10 Grade Highlights</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1>Grade 10 Topaz Highlights</h1>
+
+    <div class="container-flex">
+        <div class="highlight-card">
+            <div class="card-name">Jake Andes</div>
+            <img src="Jake.png" class="card-image">
+            <div class="card-event">JCO Camping</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Zion Fabul</div>
+            <img src="Zion.png" class="card-image">
+            <div class="card-event">Debate Competition</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">John Vicent Ligas</div>
+            <img src="JV.png" class="card-image">
+            <div class="card-event">CAT Graduation Band Performance</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Alex Tacan</div>
+            <img src="Alex.png" class="card-image">
+            <div class="card-event">Halloween Party</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Cyrenne Mendez</div>
+            <img src="Cyrenne.png" class="card-image">
+            <div class="card-event">CAT Graduation</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Vic Gorom</div>
+            <img src="Victor.png" class="card-image">
+            <div class="card-event">Balloon Powered Cars</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Martina Cabrillios</div>
+            <img src="Martina.png" class="card-image">
+            <div class="card-event">Class Officer - Vice Mayor</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Gio Escarda</div>
+            <img src="Gio.png" class="card-image">
+            <div class="card-event">JCO Camping</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Fil Ayala</div>
+            <img src=" Fil.png" class="card-image">
+            <div class="card-event">Blue Bears Volleyball Championship</div>
+        </div>
+        <div class="highlight-card">
+            <div class="card-name">Audrey Anne Dumaguing</div>
+            <img src="Audrey.png" class="card-image">
+            <div class="card-event">JCO Camping</div>
+        </div>
+    </div>
+  </body>
+</html>
